@@ -60,7 +60,7 @@ class BST(BinaryTree):
         The lecture videos have the exact code you need,
         except that their method is an instance method when it should have been a static method.
         '''
-        if none.value is None:
+        if node.value is None:
             return True
         if node.left and node.right:
             if node.value> node.left.value and node.value<node.right.value:
