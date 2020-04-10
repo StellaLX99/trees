@@ -63,8 +63,8 @@ class BST(BinaryTree):
         if node.value == None:
             return True
         if node.left and node.right:
-            if node.value < node.right.value and node.value > node.left.value:
-                return BST._is_bst_satisfied(node.left) and BST._is_bst_satisfied(node.right)
+            if node.value >node.left.value and node.value <node.right.value:
+                return BST._is_bst_satisfied(node.right) and BST._is_bst_satisfied(node.left)
             else:
                 return False
         if node.left:
@@ -240,9 +240,9 @@ class BST(BinaryTree):
         if node is None:
             return node
 
-        if node.value>value:
+        if value<node.value:
             node.left=BST._remove(value,node.left)
-        elif node.value < value:
+        elif value >node.value:
             node.right= BST._remove(value,node.left)
         else:
 
