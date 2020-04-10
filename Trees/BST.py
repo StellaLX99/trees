@@ -19,6 +19,7 @@ class BST(BinaryTree):
         If xs is a list (i.e. xs is not None),
         then each element of xs needs to be inserted into the BST.
         '''
+        self.root=None
         if xs:
             self.insert_list(xs)
 
@@ -71,9 +72,14 @@ class BST(BinaryTree):
                 return False
 
         if node.value is None:
-            return True 
+            return True  
 
-        return True 
+        if node.left and node.right:
+            if node.value> node.left.value and node.value<node.right.value:
+                return BST._is_bst_satisfied(node.left) and BST._is_bst_satisfied(node.right)
+            else:
+                return False
+        return True
 
     def insert(self, value):
         '''
@@ -99,14 +105,14 @@ class BST(BinaryTree):
                 node.left=Node(value)
             else:
                 BST._insert(value,node.left)
-        elif data> node.value:
+        elif value> node.value:
             if node.right is None:
                 node.right= Node(value)
             else:
                 BST._insert(value,node.right)
         else: 
             print("Value is already present in tree.")
-            #do not want duplicated numbers)
+            #do not want duplicated numbers
 
 
 
@@ -152,7 +158,8 @@ class BST(BinaryTree):
             return BST._find(value, node.left)
         if value == node.value:
             return True
-
+        else:
+            return False 
 
     def find_smallest(self):
         '''
