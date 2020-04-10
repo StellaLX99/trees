@@ -201,16 +201,16 @@ class BinaryTree():
             return 0
 
         stack = []
-        stack.push(self.root)
+        stack.append(self.root)
         size = 1
         while stack:
             node = stack.pop()
             if node.left:
                 size += 1
-                stack.push(node.left)
+                stack.append(node.left)
             if node.right:
                 size += 1
-                stack.push(node.right)
+                stack.append(node.right)
         return size
 
    
