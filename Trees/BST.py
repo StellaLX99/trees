@@ -63,20 +63,27 @@ class BST(BinaryTree):
         if node.value == None:
             return True
         if node.left and node.right:
-            if node.value> node.left.value and node.value<node.right.value:
-                return BST._is_bst_satisfied(node.right) and BST._is_bst_satisfied(node.left)
+            if node.value < node.right.value and node.value > node.left.value:
+                return BST._is_bst_satisfied(node.left) and BST._is_bst_satisfied(node.right)
             else:
                 return False
-        if node.left: 
-            if node.value>node.left.value:
-                return BST._is_bst_satisfied (node.left)  #data is redudant here            else:
+        if node.left:
+            if node.value > node.left.value:
+                return BST._is_bst_satisfied(node.left)
+            else:
                 return False
         if node.right:
-            if node.value <node.right.value:
-                return BST._is_bst_satisfied (node.right)
+            if node.value < node.right.value:
+                return BST._is_bst_satisfied(node.right)
             else:
                 return False
         return True
+
+
+
+
+        
+
 
     def insert(self, value):
         '''
@@ -233,9 +240,9 @@ class BST(BinaryTree):
         if node is None:
             return node
 
-        if value<node.value:
+        if node.value>value:
             node.left=BST._remove(value,node.left)
-        elif value > node.value:
+        elif node.value < value:
             node.right= BST._remove(value,node.left)
         else:
 
