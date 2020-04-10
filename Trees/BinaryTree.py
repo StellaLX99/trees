@@ -200,7 +200,7 @@ class BinaryTree():
         if self.root is None:
             return 0
 
-        stack = Stack()
+        stack = []
         stack.push(self.root)
         size = 1
         while stack:
@@ -244,7 +244,7 @@ class BinaryTree():
 
         if node is None:
             return -1
-        left_height = self.height(node.left)
-        right_height = self.height(node.right)
+        left_height = BinaryTree._height(node.left)
+        right_height = BinaryTree._height(node.right)
 
         return 1 + max(left_height, right_height)
