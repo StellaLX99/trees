@@ -251,7 +251,7 @@ class BST(BinaryTree):
         #if node.left and node.right:
         #replace its value with the minmimum value in the right subtree. 
         #Now delete that minimum node in the right subtree
-            temp_value == node.right
+            temp_value = node.right
             while temp_value.left:
                 temp_val = temp_value.left
 	# Replace value	
