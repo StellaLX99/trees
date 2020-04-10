@@ -262,7 +262,7 @@ class BST(BinaryTree):
             while temp_value.left:
                 temp_value= temp_value.left
 	# Replace value	
-            node.value = minimum
+            node.value = temp_value.value
   # Delete the minimum node in right subtree
   
             node.right = BST._remove(node.right,node.value)
