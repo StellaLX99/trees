@@ -159,27 +159,29 @@ class BinaryTree():
         '''
         if start:
             traversal.append(start.value)
-            traversal = self.preorder_print(start.left, traversal)
-            traversal = self.preorder_print(start.right, traversal)
+            traversal = self.preorder(start.left, traversal)
+            traversal = self.preorder(start.right, traversal)
         return traversal
+
     def inorder(self, start, traversal):
         '''
         FIXME:
         Implement this function by modifying the _print functions above.
         '''
         if start:
-            traversal = self.preorder_print(start.left, traversal)
+            traversal = self.inorder(start.left, traversal)
             traversal.append(start.value)
-            traversal = self.preorder_print(start.right, traversal)
+            traversal = self.inorder(start.right, traversal)
         return traversal
+
     def postorder(self, start, traversal):
         '''
         FIXME:
         Implement this function by modifying the _print functions above.
         ''' 
         if start:
-            traversal = self.preorder_print(start.left, traversal)
-            traversal = self.preorder_print(start.right, traversal)
+            traversal = self.postorder(start.left, traversal)
+            traversal = self.postorder(start.right, traversal)
             traversal.append(start.value)
         return traversal
 
