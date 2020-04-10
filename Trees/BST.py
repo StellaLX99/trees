@@ -233,16 +233,16 @@ class BST(BinaryTree):
 #Replace the content of node p with the content of the successor node
 #Delete the successor node
     @staticmethod
-    def _remove(value, node):
+    def _remove(node,value):
 
         #consider three different situations
         # scenario 1 only removing the leaf
         if node is None:
             return node
 
-        if value<node.value:
+        if node.value>value:
             node.left=BST._remove(value,node.left)
-        elif value >node.value:
+        elif node.value <value:
             node.right= BST._remove(value,node.left)
         else:
 
