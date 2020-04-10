@@ -241,9 +241,9 @@ class BST(BinaryTree):
             return node
 
         if node.value>value:
-            node.left=BST._remove(value,node.left)
+            node.left=BST._remove(node.left,value)
         elif node.value <value:
-            node.right= BST._remove(value,node.left)
+            node.right= BST._remove(node.right,value)
         else:
 
         # scenario 2 has one child
@@ -265,7 +265,7 @@ class BST(BinaryTree):
             node.value = minimum
   # Delete the minimum node in right subtree
   
-            node.right = BST._remove(node.value,node.right)
+            node.right = BST._remove(node.right,node.value)
         return node
 
 
