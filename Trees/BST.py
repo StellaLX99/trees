@@ -230,7 +230,7 @@ class BST(BinaryTree):
 
         #consider three different situations
         # scenario 1 only removing the leaf
-        if none is None:
+        if node is None:
             return node
 
         if value<node.value:
