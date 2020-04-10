@@ -60,23 +60,20 @@ class BST(BinaryTree):
         The lecture videos have the exact code you need,
         except that their method is an instance method when it should have been a static method.
         '''
+        if none.value is None:
+            return True
+        if node.left and node.right:
+            if node.value> node.left.value and node.value<node.right.value:
+                return BST._is_bst_satisfied(node.right) and BST._is_bst_satisfied(node.left)
+            else:
+                return False
         if node.left: 
             if node.value>node.left.value:
-                return BST._is_bst_satisfied (node.left)  #data is redudant here 
-            else:
+                return BST._is_bst_satisfied (node.left)  #data is redudant here            else:
                 return False
         if node.right:
             if node.value <node.right.value:
                 return BST._is_bst_satisfied (node.right)
-            else:
-                return False
-
-        if node.value== None:
-            return True  
-
-        if node.left and node.right:
-            if node.value> node.left.value and node.value<node.right.value:
-                return BST._is_bst_satisfied(node.right) and BST._is_bst_satisfied(node.left)
             else:
                 return False
         return True
@@ -233,15 +230,8 @@ class BST(BinaryTree):
 
         #consider three different situations
         # scenario 1 only removing the leaf
-
-        if node.left == None and node.right == None: #a leaf
-            if none.value==value:
-                return None
-            else:
-                return node 
-                # the value that we wish to eliminate is not found )
-        if node == None: #the tree is empty
-            return Node 
+        if none is None:
+            return node
 
         if value<node.value:
             node.left=BST._remove(value,node.left)
