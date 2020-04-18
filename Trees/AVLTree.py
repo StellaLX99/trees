@@ -1,7 +1,7 @@
 '''
 This file implements the AVL Tree data structure.
 The functions in this file are considerably harder than the functions in the BinaryTree and BST files.
-'''`
+'''
 from Trees.BinaryTree import BinaryTree, Node
 from Trees.BST import BST
 
