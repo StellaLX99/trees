@@ -195,7 +195,7 @@ class Heap(BinaryTree):
     @staticmethod
 
     def _remove_last_node(node):
-        binary = '{0:b}'.format(node.descendents)
+        binary = "{0:b}".format(node.descendents)
         node.descendents = node.descendents -1 
         if len(binary) ==2:
             if binary[1] =='1':
