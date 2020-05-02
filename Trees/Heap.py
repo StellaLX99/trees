@@ -183,9 +183,7 @@ class Heap(BinaryTree):
 
     #helper function
     #remove_last_node, use the binary code
-    # swap, use the same logic before, exchange value and also binary code 
-
-    
+    # swap, use the same logic before, exchange value and also binary code     
     @staticmethod
 
     def _remove_last_node(node):
@@ -227,15 +225,6 @@ class Heap(BinaryTree):
             if node.right.value < node.value:
                 node.value, node.right.value = node.right.value, node.value
                 Heap._swap(node.right)
-
-
-
-
-
-
-
-
-
 
 
 
