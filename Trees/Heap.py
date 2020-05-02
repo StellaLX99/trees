@@ -172,12 +172,12 @@ class Heap(BinaryTree):
         '''
         #if the tree is empty, then nothing, remove is also none 
         #when you remove, you remove from the root, and then swap from nodes down
-        if self.root is None:
-            self.root = None
-        elif self.root.left and self.root.right is None:
-            self.root = None
-        else:
-            self.root.value = Heap._remove_last_node(self.root)
+        #if self.root is None:
+           # self.root = None
+       # elif self.root.left and self.root.right is None:
+            #self.root = None
+        #else:
+        self.root.value = Heap._remove_last_node(self.root)
         if not Heap._is_heap_satisfied(self.root):
             Heap._swap(self.root)
 
@@ -193,12 +193,13 @@ class Heap(BinaryTree):
         node.descendents = node.descendents -1 
         if len(binary) ==2:
             if binary[1] =='1':
-                newnode=node.right.value
-                node.right = None #put it on the right branch 
+                new=node.right
+                node.right = None #put it on the right branch
+
             elif binary[1] == '0':
-                newnode= node.left.value
+                new= node.left
                 node.left = None # put it on the left
-            return newnode
+            return new.value
         else:
             if binary[1] == '1':
                 return Heap._remove_last_node(node.right)
