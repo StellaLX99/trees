@@ -181,13 +181,16 @@ class Heap(BinaryTree):
            #self.root.value = new
            #if not Heap._is_heap_satisfied(self.root):
                #Heap._swap(self.root)
-        if self.root is None or (self.root.right is None and self.root.left is None):
+        if self.root is None:
+            pass
+        elif self.root and self.root.left is None:
             self.root = None
+        elif self.root.left and self.root.left
+            self.root.value = Heap._remove_last_node(self.root)
+            if not Heap._is_heap_satisfied(self.root):
+                Heap._swap(self.root)
 
-        else:
-            new = Heap._remove_last_node(self.root)
-            self.root.value = new
-            Heap._swap(self.root)
+
 
     #helper function
     #remove_last_node, use the binary code
