@@ -3,7 +3,7 @@
 
 from Trees.BinaryTree import BinaryTree, Node
 
-class Heap():
+class Heap(BinaryTree):
     '''
     FIXME:
     Heap is currently not a subclass of BinaryTree.
@@ -17,6 +17,9 @@ class Heap():
         If xs is a list (i.e. xs is not None),
         then each element of xs needs to be inserted into the Heap.
         '''
+        super().__init__() 
+        if xs :
+            self.insert_list(xs)
 
 
     def __repr__(self):
@@ -27,7 +30,6 @@ class Heap():
         Recall that the __repr__ function should return a string that can be used to recreate a valid instance of the class.
         Thus, if you create a variable using the command Heap([1,2,3])
         it's __repr__ will return "Heap([1,2,3])"
-
         For the Heap, type(self).__name__ will be the string "Heap",
         but for the AVLTree, this expression will be "AVLTree".
         Using this expression ensures that all subclasses of Heap will have a correct implementation of __repr__,
@@ -56,6 +58,25 @@ class Heap():
         The lecture videos have the exact code you need,
         except that their method is an instance method when it should have been a static method.
         '''
+    #Heap only have max and min max--parent > children, min--parent < children, but still need to be in order
+    #trickle up/down
+        left=True
+        right=True 
+        if node.left: 
+            if node.value<=node.left.value:
+                left= Heap._is_heap_satisfied (node.left)  
+            else:
+                return False
+        if node.right:
+            if node.value <=node.right.value:
+                right= Heap._is_heap_satisfied (node.right)
+            else:
+                return False
+        if node is None:
+            return True 
+        if left and right:
+            return True 
+        return True 
 
 
     def insert(self, value):
@@ -68,6 +89,13 @@ class Heap():
         else:
             Heap._insert(value, self.root)
 
+#insert from the next empty branch (by order)
+# then swap spot, down/up
+#use binary representation, get rid of the first digit
+# 0 goes to the left, 1 goes to the right 
+#need swap helper, down/up helper 
+
+
 
     @staticmethod
     def _insert(value, node):
@@ -75,37 +103,134 @@ class Heap():
         FIXME:
         Implement this function.
         '''
+        Heap.insert(value,node)
+# 0 left 1 right
+
+        node.descendents=node.descendents+1
+
+        binary ="{0:b}".format(node.descendents)
+
+        if binary[1] == '0':
+            if node.left is None:
+                node.left = Node(value)
+                node.left.descendents =1 #indicate where to go 
+            else:
+                Heap._insert(value,node.left)
+        #but if insert does not satisfy heap, then needs to swap
+        # a min tree
+            if node.left.value< node.value: # should be child > parent, trickle up 
+        # swap! 
+                node.left.value, node.value= node.value, node.left.value 
+
+
+        if binary[1] =='1': #binary code, right
+            if node.right is None:
+                node.right = Node(value)
+                node.right.descendents =1 #indicate where to go 
+            else:
+                Heap._insert(value,node.right)
+        #but if insert does not satisfy heap, then needs to swap
+        # a min tree
+            if node.right.value< node.value: # should be child > parent, trickle up 
+        # swap! 
+                node.right.value, node.value= node.value, node.right.value 
+    
+
 
 
     def insert_list(self, xs):
         '''
         Given a list xs, insert each element of xs into self.
-
         FIXME:
         Implement this function.
         '''
-
+        for i in xs:
+            self.insert(i)
 
     def find_smallest(self):
         '''
         Returns the smallest value in the tree.
-
         FIXME:
         Implement this function.
         This function is not implemented in the lecture notes,
         but if you understand the structure of a Heap it should be easy to implement.
-
         HINT:
         Create a recursive staticmethod helper function,
         similar to how the insert and find functions have recursive helpers.
         '''
+        if self.root:
+            return Heap._find_smallest(self.root)
 
+    @staticmethod
+    def _find_smallest(node):
+        return node.value
 
     def remove_min(self):
         '''
         Removes the minimum value from the Heap. 
         If the heap is empty, it does nothing.
-
         FIXME:
         Implement this function.
         '''
+        #when you remove, you remove from the root, and then swap from nodes down
+        self.root.value = Heap._remove_last_node(self.root)
+        if not Heap._is_heap_satisfied(self.root):
+            Heap._swap(self.root)
+
+    #helper function
+    #remove_last_node, use the binary code
+    # swap, use the same logic before, exchange value and also binary code 
+
+    
+    @staticmethod
+
+    def _remove_last_node(node):
+        binary = '{0,b}', format(node.descendents)
+        node.descendents = node.descendents -1 
+        if len(binary) ==2:
+            if binary[1] =='1':
+                newnode=node.right
+                node.right = None #put it on the right branch 
+            elif binary[1] == '0':
+                newnode= node.left
+                node.left = None # put it on the left
+            return newnode.value 
+        else:
+            if binary[1] == '1':
+                return Heap._remove_last_node(node.right)
+            elif binary[1] == '0':
+                return Heap._remove_last_node(node.left)
+
+    def _swap(node):
+        #situation 1 tree is empty
+        if node.left is None and node.right is None:
+            return node 
+        #situation 2, both of left and right exists and compare
+        elif node.left and node.right:
+            if node.left.value < node.right.value:
+                node.value, node.left.value = node.left.value, node.value
+                Heap._swap(node.left)
+            elif node.left.value > node.right.value:
+                node.value, node.right.value = node.right.value, node.value
+                Heap._swap(node.right)
+        # situation 3, only left exists
+        elif node.left and node.right is None:
+            if node.left.value < node.value:
+                node.value, node.left.value = node.left.value, node.value
+                Heap._swap(node.left)
+        elif node.right and node.left is None:
+            if node.right.value < node.value:
+                node.value, node.right.value = node.right.value, node.value
+                Heap._swap(node.right)
+
+
+
+
+
+
+
+
+
+
+
+
