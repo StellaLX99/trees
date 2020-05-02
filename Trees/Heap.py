@@ -225,9 +225,9 @@ class Heap(BinaryTree):
             return new.value
         else:
             if binary[1] == '0':
-                return Heap._remove_last_element(node.left) 
+                return Heap._remove_last_node(node.left) 
             elif binary[1] == '1':
-                return Heap._remove_last_element(node.right)
+                return Heap._remove_last_node(node.right)
 
     def _swap(node):
         #situation 1 tree is empty
