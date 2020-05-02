@@ -74,9 +74,8 @@ class Heap(BinaryTree):
                 return False
         if node is None:
             return True 
-        if left and right:
-            return True 
-        return True 
+        return left and right
+
 
 
     def insert(self, value):
@@ -103,7 +102,6 @@ class Heap(BinaryTree):
         FIXME:
         Implement this function.
         '''
-        Heap.insert(value,node)
 # 0 left 1 right
 
         node.descendents=node.descendents+1
