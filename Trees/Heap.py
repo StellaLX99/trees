@@ -195,23 +195,39 @@ class Heap(BinaryTree):
     @staticmethod
 
     def _remove_last_node(node):
-        binary = "{0:b}".format(node.descendents)
-        node.descendents = node.descendents -1 
-        if len(binary) ==2:
-            if binary[1] =='1':
-                new=node.right
+        #binary = "{0:b}".format(node.descendents)
+        #node.descendents = node.descendents -1 
+        #if len(binary) ==2:
+           # if binary[1] =='1':
+                #new=node.right
+                #node.right = None
+                #return new.value
+            #else:
+                #return Heap._remove_last_node(node.right)
+        #else:
+            #if binary[1] == '0':
+                #new= node.left
+                #node.left = None 
+                #return new.value
+            #else:
+                #return Heap._remove_last_node(node.left)
+
+
+        binary = "{0:b}".format(node.descendents) 
+        node.descendents -= 1
+        if len(binary) == 2:
+            if binary[1] == '1':
+                new = node.right
                 node.right = None
-                return new.value
-            else:
-                return Heap._remove_last_node(node.right)
+            elif binary[1] == '0':
+                new = node.left
+                node.left = None
+            return new.value
         else:
             if binary[1] == '0':
-                new= node.left
-                node.left = None 
-                return new.value
-            else:
-                return Heap._remove_last_node(node.left)
-
+                return Heap._remove_last_element(node.left) 
+            elif binary[1] == '1':
+                return Heap._remove_last_element(node.right)
 
     def _swap(node):
         #situation 1 tree is empty
