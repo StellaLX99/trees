@@ -177,7 +177,7 @@ class Heap(BinaryTree):
         elif self.root.left and self.root.right is None:
             self.root = None
         else:
-        self.root.value = Heap._remove_last_node(self.root)
+            self.root.value = Heap._remove_last_node(self.root)
         if not Heap._is_heap_satisfied(self.root):
             Heap._swap(self.root)
 
