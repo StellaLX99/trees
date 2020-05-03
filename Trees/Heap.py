@@ -217,9 +217,7 @@ class Heap(BinaryTree):
 
 
         binary = "{0:b}".format(node.descendents) 
-        node.descendents -= 1
-        if len(binary) ==1:
-            node = None
+        node.descendents = node.descendents -1 
         if len(binary) == 2:
             if binary[1] == '1':
                 new = node.right
@@ -240,10 +238,10 @@ class Heap(BinaryTree):
             return node 
         #situation 2, both of left and right exists and compare
         elif node.left and node.right:
-            if node.left.value < node.right.value:
+            if node.left.value <= node.right.value and node.left.value<node.value:
                 node.value, node.left.value = node.left.value, node.value
                 Heap._swap(node.left)
-            elif node.left.value > node.right.value:
+            elif node.left.value >= node.right.value and node.right.value<node.value:
                 node.value, node.right.value = node.right.value, node.value
                 Heap._swap(node.right)
         # situation 3, only left exists
@@ -251,7 +249,8 @@ class Heap(BinaryTree):
             if node.left.value < node.value:
                 node.value, node.left.value = node.left.value, node.value
                 Heap._swap(node.left)
-        elif node.right and node.left is None:
+       #situation4, only right exists
+       elif node.right and node.left is None:
             if node.right.value < node.value:
                 node.value, node.right.value = node.right.value, node.value
                 Heap._swap(node.right)
