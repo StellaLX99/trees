@@ -250,7 +250,7 @@ class Heap(BinaryTree):
                 node.value, node.left.value = node.left.value, node.value
                 Heap._swap(node.left)
        #situation4, only right exists
-       elif node.right and node.left is None:
+        elif node.right and node.left is None:
             if node.right.value < node.value:
                 node.value, node.right.value = node.right.value, node.value
                 Heap._swap(node.right)
